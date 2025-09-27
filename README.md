@@ -1,23 +1,28 @@
-## 📘 README.md
+Nice 🚀 — now I see your **routes** for the Job-portal app. That means your API is not just CRUD for jobs, but also has **authentication, stats, and user management**.
+
+Let me update both the **README.md** and the **resume description** to reflect these properly.
+
+---
+
+## 📘 Updated README.md (with your routes)
 
 ```markdown
 # Job Portal Application
 
-A Node.js backend application that allows managing job listings and candidate jobs using RESTful APIs and JSON data.  
-This project demonstrates backend routing, data modeling, middleware, and CRUD operations with an in-memory data store.
+A backend web application for managing job postings and user accounts.  
+Built with **Node.js** and **Express**, featuring authentication, job statistics, and secure CRUD operations.
 
 ---
 
-## 🛠️ Features
+## ✨ Features
 
-- View all job postings  
-- Get details of a single job by ID  
-- Add new job postings  
-- Update existing jobs  
-- Delete job postings  
-- Middleware for validation (job data format, required fields)  
-- Modular architecture with controllers, models, routes, and middlewares  
-- Uses a `jobs-data.json` file as a data store (can be swapped with database later)  
+- 🔐 User authentication (register & login with rate limiting)
+- 👤 User profile update endpoint
+- 📋 Create, read, update, and delete job postings
+- 📊 Job statistics & filtering
+- 🛡️ Protected routes with middleware (`userAuth`)
+- 🚦 Rate limiting to prevent brute-force login/register attempts
+- 🧩 Modular project structure with controllers, models, routes, and middleware
 
 ---
 
@@ -26,15 +31,13 @@ This project demonstrates backend routing, data modeling, middleware, and CRUD o
 ```
 
 .
-├── config/              # Configuration files (e.g. constants, settings)
-├── controllers/         # Business logic & handlers
-├── middelwares/         # Validation, error-handling, etc.
-├── models/              # Data model abstractions (or data access logic)
-├── routes/               # Express route definitions
-├── jobs-data.json       # Sample JSON file storing jobs data
-├── server.js             # Application entry point
+├── config/              # Config files (DB, JWT, etc.)
+├── controllers/         # Route handlers (jobs, auth, users)
+├── middlewares/         # userAuth, validation, rate limiting
+├── models/              # Data models (User, Job)
+├── routes/              # Express route definitions
+├── server.js            # App entry point
 ├── package.json
-├── package-lock.json
 └── README.md
 
 ````
@@ -47,6 +50,7 @@ This project demonstrates backend routing, data modeling, middleware, and CRUD o
 
 - Node.js (v14+ recommended)  
 - npm or yarn  
+- MongoDB (local or cloud, if integrated)
 
 ### Installation
 
@@ -62,37 +66,56 @@ npm install
 npm start
 ```
 
-Then open (or consume via API client) on `http://localhost:3000` (or whichever port is configured in your code).
+Visit `http://localhost:3000` (or your configured port).
 
 ---
 
 ## 🧭 API Endpoints
 
-| Method | Route       | Description              |
-| ------ | ----------- | ------------------------ |
-| GET    | `/jobs`     | Get all job postings     |
-| GET    | `/jobs/:id` | Get job details by ID    |
-| POST   | `/jobs`     | Create a new job posting |
-| PUT    | `/jobs/:id` | Update job posting by ID |
-| DELETE | `/jobs/:id` | Delete job posting by ID |
+### 🔐 Authentication
 
-*(Adjust the above if your actual routes are slightly different in your implementation.)*
+| Method | Route       | Description       |
+| ------ | ----------- | ----------------- |
+| POST   | `/login`    | User login        |
+| POST   | `/register` | User registration |
+
+### 📋 Jobs
+
+| Method | Route             | Description               |
+| ------ | ----------------- | ------------------------- |
+| POST   | `/create-job`     | Create a new job          |
+| GET    | `/get-job`        | Get all jobs (for a user) |
+| PATCH  | `/update-job/:id` | Update a job by ID        |
+| DELETE | `/delete-job/:id` | Delete a job by ID        |
+| GET    | `/job-stats`      | Get job stats & filters   |
+
+### 👤 Users
+
+| Method | Route          | Description         |
+| ------ | -------------- | ------------------- |
+| PUT    | `/update-user` | Update user profile |
+
+### 🧪 Testing
+
+| Method | Route        | Description               |
+| ------ | ------------ | ------------------------- |
+| POST   | `/test-post` | Test protected POST route |
 
 ---
 
 ## 🔧 Future Enhancements
 
-* Switch from JSON file to a database (MongoDB, PostgreSQL, etc.)
-* Add authentication & authorization (admin vs applicant)
-* Implement search, filters, pagination for job listings
-* Add front-end interface (React / Angular / Vue)
-* Add file uploads for resumes, job attachments
-* Add logging, error tracking, and API security (rate limiting, validation)
+* Add JWT refresh tokens & session handling
+* Role-based access (Admin, Employer, Candidate)
+* Advanced job filters (location, salary, remote, etc.)
+* Resume uploads & file handling
+* Integration with frontend client (React, Angular, Vue)
+* Containerization with Docker
 
 ---
 
-## 👤 Author / Credits
+## 👨‍💻 Author
 
-Developed By **Tejsva pandey**.
-Based on the structure and code contributions from the original project.
+Developed and maintained by **Tejsva Pandey**.
+Feel free to fork and extend this project.
 
